@@ -4,6 +4,7 @@ package com.example.android.buconnect.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val fab = findViewById<FloatingActionButton>(R.id.fab)
+        val fab = findViewById<Button>(R.id.fab)
         fab.setOnClickListener {
             val intent = Intent(this@MainActivity, NewChatActivity::class.java)
             startActivityForResult(intent, newChatActivityRequestCode)
