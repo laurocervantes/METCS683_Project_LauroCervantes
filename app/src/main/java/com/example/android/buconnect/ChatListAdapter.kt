@@ -24,10 +24,10 @@ class ChatListAdapter : ListAdapter<Chat, WordViewHolder>(WORDS_COMPARATOR) {
     }
 
     class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val wordItemView: TextView = itemView.findViewById(R.id.textView)
+        private val chatItemView: TextView = itemView.findViewById(R.id.textView)
 
         fun bind(text: String?) {
-            wordItemView.text = text
+            chatItemView.text = text
         }
 
         companion object {

@@ -6,13 +6,13 @@ import com.example.android.buconnect.data.ChatDao
 import kotlinx.coroutines.flow.Flow
 
 
-class ChatRepository(private val wordDao: ChatDao) {
+class ChatRepository(private val chatDao: ChatDao) {
 
-    val allWords: Flow<List<Chat>> = wordDao.getAlphabetizedWords()
+    val allWords: Flow<List<Chat>> = chatDao.getAlphabetizedWords()
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
     suspend fun insert(word: Chat) {
-        wordDao.insert(word)
+        chatDao.insert(word)
     }
 }
