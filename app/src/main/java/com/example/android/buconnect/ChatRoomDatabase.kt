@@ -14,24 +14,24 @@ import kotlinx.coroutines.launch
 
 
 @Database(entities = [Chat::class], version = 1)
-abstract class WordRoomDatabase : RoomDatabase() {
+abstract class ChatRoomDatabase : RoomDatabase() {
 
-    abstract fun wordDao(): ChatDao
+    abstract fun chatDao(): ChatDao
 
     companion object {
         @Volatile
-        private var INSTANCE: WordRoomDatabase? = null
+        private var INSTANCE: ChatRoomDatabase? = null
 
         fun getDatabase(
             context: Context,
             scope: CoroutineScope
-        ): WordRoomDatabase {
+        ): ChatRoomDatabase {
             // if the INSTANCE is not null, then return it,
             // if it is, then create the database
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    WordRoomDatabase::class.java,
+                    ChatRoomDatabase::class.java,
                     "word_database"
                 )
                     // Wipes and rebuilds instead of migrating if no Migration object.
@@ -57,19 +57,19 @@ abstract class WordRoomDatabase : RoomDatabase() {
                 // comment out the following line.
                 INSTANCE?.let { database ->
                     scope.launch(Dispatchers.IO) {
-                        populateDatabase(database.wordDao())
+                        populateDatabase(database.chatDao())
                     }
                 }
             }
         }
 
-        suspend fun populateDatabase(wordDao: ChatDao) {
-            wordDao.deleteAll()
+        suspend fun populateDatabase(chatDao: ChatDao) {
+            chatDao.deleteAll()
 
-            var word = Chat("Hello")
-            wordDao.insert(word)
-            word = Chat("World!")
-            wordDao.insert(word)
+            var message = Chat("")
+            chatDao.insert(message)
+            message = Chat("")
+            chatDao.insert(message)
         }
     }
 }

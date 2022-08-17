@@ -9,6 +9,6 @@ class ChatsApplication : Application() {
     val applicationScope = CoroutineScope(SupervisorJob())
 
 
-    val database by lazy { WordRoomDatabase.getDatabase(this, applicationScope) }
-    val repository by lazy { ChatRepository(database.wordDao()) }
+    val database by lazy { ChatRoomDatabase.getDatabase(this, applicationScope) }
+    val repository by lazy { ChatRepository(database.chatDao()) }
 }
